@@ -128,7 +128,7 @@ def add_category(d):
 def workflow():
     d = search_subs()
     d = add_category(d)
-    draw_cat_per_sub(d)
+    draw_cat_per_sub(d, "reddit.svg")
     # print(d)
 
 
