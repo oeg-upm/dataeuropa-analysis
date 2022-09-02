@@ -13,7 +13,8 @@ def search_subreddit(subreddit, search_query):
     if os.path.exists(json_path):
         print("Ignore search. %s already exists" % json_path)
     else:
-        url = "https://www.reddit.com/r/%s/search.json?q=%s" % (subreddit, search_query)
+        url = "https://www.reddit.com/r/%s/search.json?q=%s&limit=100" % (subreddit, search_query)
+        print("request url: %s" % url)
         # r = requests.get(url)
         # Just to get ride of the the error Too many requests
         r = requests.get(url, headers={'User-agent': 'your bot 0.1'})
