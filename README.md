@@ -13,3 +13,11 @@ python -m datacoll.stackoverflow
 ```
 python -m datacoll.reddit
 ```
+## Github
+![](github_code.svg)
+![](github_commits.svg)
+![](github_repositories.svg)
+
+```
+python -m datacoll.github
+```

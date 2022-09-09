@@ -5,7 +5,7 @@ def ppretty(j):
     print(json.dumps(j, indent=4, sort_keys=True))
 
 
-def parse(text, seps=[")", " ", "(", "[", "]", ",", "", "}", "{", "\n", ".", "\r"]):
+def parse(text, seps=[")", " ", "(", "[", "]", ",", "}", "{", "\n", ".", "\r"]):
     if len(seps) == 0:
         return [text]
     tokens = []
