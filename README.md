@@ -9,7 +9,9 @@ python -m datacoll.stackoverflow
 ```
 
 ## Reddit
-![](reddit.svg)
+![](reddit_cat.svg)
+![](reddit_cat_per_sub.svg)
+![](reddit_class.svg) 
 ```
 python -m datacoll.reddit
 ```

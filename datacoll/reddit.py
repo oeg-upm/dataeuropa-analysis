@@ -2,7 +2,9 @@ import requests
 import os
 import json
 from analysis.util import ppretty, parse, categorize_edp_url
-from analysis.category import draw_cat_per_sub
+from analysis.category import draw_cat_per_sub, draw_count
+from analysis.classify import classify_nlp4types
+from analysis.word import draw_words_freq
 from collections import Counter
 
 edp_search_query = "data.europa.eu"
@@ -14,9 +16,11 @@ def split_into_subreddits(d):
         sub = j["data"]["subreddit"]
         if sub not in per_sub:
             per_sub[sub] = {'posts': []}
-        rec = {'url': j["data"]["url"], 'score': j["data"]["score"], 'title': j["data"]["title"],
+        rec = {'url': j["data"]["url"], 'score': j["data"]["score"], 'title': j["data"]["title"], 'class': '',
                'upvote_ratio': j["data"]["upvote_ratio"], 'ups': j["data"]["ups"], 'kind': j["kind"],
                'text': j["data"]["selftext"]}
+        if j["data"]["selftext"].strip() != "":
+            rec['class'] = classify_nlp4types(j["data"]["selftext"], cache=os.path.join("data", "reddit", "nlp4types"))
         per_sub[sub]['posts'].append(rec)
     return per_sub
 
@@ -119,13 +123,34 @@ def remove_empty(d):
             del d[sub]
 
 
+def get_cat_merged(d):
+    cat_count = Counter([])
+    for sub in d:
+        cat_count += d[sub]['categories']
+    return cat_count
+
+
+def get_classes(d):
+    classes = []
+    for sub in d:
+        for post in d[sub]['posts']:
+            if post['class'] == "":
+                continue
+            classes.append(post['class'])
+    return classes
+
+
 def workflow():
     d = search_subreddit()
     d = split_into_subreddits(d)
     fetch_urls(d)
     d = add_category(d)
     remove_empty(d)
-    draw_cat_per_sub(d, "reddit.svg", palette="magma_r")
+    draw_cat_per_sub(d, "reddit_cat_per_sub.svg", palette="magma_r")
+    cat_count = get_cat_merged(d)
+    draw_count(cat_count, "reddit_cat.svg")
+    classes = get_classes(d)
+    draw_words_freq(classes, 100, palette="mako", out_fname="reddit_class.svg")
 
 
 if __name__ == "__main__":

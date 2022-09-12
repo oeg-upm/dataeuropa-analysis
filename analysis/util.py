@@ -27,3 +27,13 @@ def categorize_edp_url(url):
     if "/dataset" in url or '/data/' in url:
         return "Dataset"
     return "Other"
+
+
+def shorten_url(url):
+    prefixes = [
+        ["http://dbpedia.org/ontology/", "dbo:"],
+    ]
+    for p in prefixes:
+        if url.startswith(p[0]):
+            return url.replace(p[0], p[1])
+    return url
