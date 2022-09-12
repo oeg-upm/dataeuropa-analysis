@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def draw_cat_per_sub(d, out_fname=None):
+def draw_cat_per_sub(d, out_fname=None, palette="mako"):
     data = []
     for sub in d:
         for cat in d[sub]['categories']:
