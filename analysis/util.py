@@ -20,8 +20,10 @@ def parse(text, seps=[")", " ", "(", "[", "]", ",", "", "}", "{", "\n", ".", "\r
 
 
 def categorize_edp_url(url):
-    if "/dataset" in url:
-        return "dataset"
     if "/datastories" in url:
-        return "datastories"
-    return "other"
+        return "Data Story"
+    if "/eli/" in url:
+        return "Legislation"
+    if "/dataset" in url or '/data/' in url:
+        return "Dataset"
+    return "Other"

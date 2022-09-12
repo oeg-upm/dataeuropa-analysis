@@ -14,9 +14,9 @@ def draw_cat_per_sub(d, out_fname=None):
             data.append(line)
 
     df = pd.DataFrame(data, columns=["subreddit", "Category", "Occurrences"])
-    ax = sns.barplot(y="Occurrences", x="subreddit", hue="Category", palette="viridis", data=df)
-    ax.figure.subplots_adjust(left=0.2)
-
+    ax = sns.barplot(y="Occurrences", x="subreddit", hue="Category", palette="magma_r", data=df)
+    ax.figure.subplots_adjust(bottom=0.4)
+    plt.xticks(rotation=90)
     if out_fname:
         ax.figure.savefig(out_fname)
     else:
