@@ -6,10 +6,7 @@ import requests
 import os
 import time
 from nltk.corpus import stopwords
-import shutil
-import seaborn as sns
-import pandas as pd
-import matplotlib.pyplot as plt
+import sys
 
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 edp_search_query = "data.europa.eu"
@@ -17,16 +14,16 @@ github_token="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"
 github_targets={'code':['repository','description'], 'repositories':['description'],
                     'commits':['repository','description'], 'issues':[], 'topics':[]}
 #Targets=code, repositories, commits, issues, topics
-def get_from_github(github_token,target,search_query):
+def get_from_github(github_token,target,search_query,page=1):
     json_path = os.path.join(ROOT_DIR,'data', 'github', target + ".json")
     if os.path.exists(json_path):
         print("Ignore search. %s already exists" % json_path)
     else:
         #We need to attain partial results up until we get a 403
         #Code page 20
-        page=21
         code=200
-        while code==200:
+        content=True
+        while code==200 and content:
             base_json_path = os.path.join(ROOT_DIR, 'data', 'github', "part_" + target +'_'+str(page) +".json")
             url = "https://api.github.com/search/%s?q=%s&page=%s" % (target, search_query,str(page))
             print("request url: %s" % url)
@@ -36,14 +33,16 @@ def get_from_github(github_token,target,search_query):
                 with open(base_json_path,'w') as f:
                     f.write(r.text)
             time.sleep(5)
+            if not json.loads(r.text)['items']:
+                content=False
             print('Reached page %d' %page)
             page += 1
-    # with open(json_path,'w') as f:
-    #     j = json.load(f)
-    # return j
 
 def get_items_json(target, keys):
     content={}
+    if os.path.exists(os.path.join(ROOT_DIR, 'data', 'github',target+'.pkl')):
+        with open(os.path.join(ROOT_DIR, 'data', 'github', target + '.pkl'), 'rb') as handle:
+            content=pickle.load(handle)
     for f in os.listdir(os.path.join(ROOT_DIR, 'data', 'github')):
         if 'part' in f and target in f:
             json_file=json.load(open(os.path.join(ROOT_DIR, 'data', 'github',f)))
@@ -56,6 +55,9 @@ def get_items_json(target, keys):
                         content[p['repository_url']] = p[keys[0]][keys[1]]  # how to make this adaptable to all file types?
                 elif target=='repositories':
                         content[p['name']] = p[keys[0]]  # how to make this adaptable to all file types?
+            os.remove(os.path.join(ROOT_DIR, 'data', 'github',f))
+    with open(os.path.join(ROOT_DIR, 'data', 'github',target+'.pkl'),'wb') as handle:
+       pickle.dump(content,handle,protocol=pickle.HIGHEST_PROTOCOL)
     return content
 
 def analyze_content(target):
@@ -85,17 +87,10 @@ def analyze_content(target):
 def plot_tokens(target,tokens):
     plot_wordcloud_github(target,tokens)
 
-def workflow():
-    for i in github_targets.keys():
-        j=get_from_github(github_token,i,edp_search_query)
-        content=get_items_json(j,github_targets[i])
-
 if __name__ == "__main__":
-    target='commits'
-    #get_from_github(github_token,target,edp_search_query)
+    target=sys.argv[1]
+    get_from_github(github_token,target,edp_search_query)
     content=get_items_json(target,github_targets[target])
-    with open(os.path.join(ROOT_DIR, 'data', 'github',target+'.pkl'),'wb') as handle:
-       pickle.dump(content,handle,protocol=pickle.HIGHEST_PROTOCOL)
     tokens=analyze_content(target)
     plot_tokens(target,tokens)
 

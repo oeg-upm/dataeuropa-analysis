@@ -17,9 +17,21 @@ python -m datacoll.reddit
 ```
 ## Github
 ![](github_code.svg)
+
+```
+python -m datacoll.github code
+```
 ![](github_commits.svg)
+
+```
+python -m datacoll.github commits
+```
+
 ![](github_repositories.svg)
 
 ```
-python -m datacoll.github
+python -m datacoll.github repositories
 ```
+
+![](data_europe_distribution.svg)
+Distribution of data.europe.eu resources across Github sources.
