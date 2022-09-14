@@ -16,12 +16,15 @@ python -m datacoll.stackoverflow
 python -m datacoll.reddit
 ```
 ## Github
+### Code
 ![](github_code.svg)
 ![](github_code_class.svg)
 
 ```
 python -m datacoll.github code
 ```
+
+### Commits
 ![](github_commits.svg)
 ![](github_commits_class.svg)
 
@@ -29,12 +32,13 @@ python -m datacoll.github code
 python -m datacoll.github commits
 ```
 
+
+### Repositories
 ![](github_repositories.svg)
 ![](github_repositories_class.svg)
 
 ```
 python -m datacoll.github repositories
 ```
-
+### Distribution of data.europe.eu resources across Github sources
 ![](data_europe_distribution.svg)
-Distribution of data.europe.eu resources across Github sources.
