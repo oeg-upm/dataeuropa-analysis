@@ -2,6 +2,8 @@ import json
 import pickle
 from analysis.util import parse
 from analysis.wordcloud import plot_wordcloud_github
+from analysis.classify import classify_nlp4types
+from analysis.word import draw_words_freq
 import requests
 import os
 import time
@@ -30,11 +32,12 @@ def get_from_github(github_token,target,search_query,page=1):
             r = requests.get(url, headers={'Accept': 'application/vnd.github+json', 'Authorization': 'token '+github_token})
             code=r.status_code
             if code==200:
-                with open(base_json_path,'w') as f:
-                    f.write(r.text)
+                if not json.loads(r.text)['items']:
+                    content=False
+                else:
+                    with open(base_json_path,'w') as f:
+                        f.write(r.text)
             time.sleep(5)
-            if not json.loads(r.text)['items']:
-                content=False
             print('Reached page %d' %page)
             page += 1
 
@@ -85,12 +88,23 @@ def analyze_content(target):
 
 
 def plot_tokens(target,tokens):
-    plot_wordcloud_github(target,tokens)
+    plot_wordcloud_github(target,tokens,outFname="github_"+target+".svg")
+
+def plot_types(target,content):
+    types=[]
+    for k,v in content.items():
+        if v is not None:
+            t=classify_nlp4types(v)
+            types.append(t)
+    draw_words_freq(types, 100, palette="mako", out_fname="github_"+target+"_class.svg")
+
+
 
 if __name__ == "__main__":
     target=sys.argv[1]
     get_from_github(github_token,target,edp_search_query)
     content=get_items_json(target,github_targets[target])
     tokens=analyze_content(target)
+    plot_types(target,content)
     plot_tokens(target,tokens)
 

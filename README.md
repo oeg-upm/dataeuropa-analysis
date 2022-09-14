@@ -17,17 +17,20 @@ python -m datacoll.reddit
 ```
 ## Github
 ![](github_code.svg)
+![](github_code_class.svg)
 
 ```
 python -m datacoll.github code
 ```
 ![](github_commits.svg)
+![](github_commits_class.svg)
 
 ```
 python -m datacoll.github commits
 ```
 
 ![](github_repositories.svg)
+![](github_repositories_class.svg)
 
 ```
 python -m datacoll.github repositories
