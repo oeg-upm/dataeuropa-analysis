@@ -12,6 +12,8 @@ python -m datacoll.stackoverflow
 ![](reddit_cat.svg)
 ![](reddit_cat_per_sub.svg)
 ![](reddit_class.svg) 
+#### Dataset per EDP Category
+![](reddit_datasets_cats.svg) 
 ```
 python -m datacoll.reddit
 ```

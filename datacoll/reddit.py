@@ -5,6 +5,7 @@ from analysis.util import ppretty, parse, categorize_edp_url
 from analysis.category import draw_cat_per_sub, draw_count
 from analysis.classify import classify_nlp4types
 from analysis.word import draw_words_freq
+from analysis.scraptopic import cat_from_url
 from collections import Counter
 
 edp_search_query = "data.europa.eu"
@@ -140,6 +141,22 @@ def get_classes(d):
     return classes
 
 
+def draw_dataset_edp_cat(d):
+    urls = []
+    for sub in d:
+        urls += d[sub]['urls']
+    cats = []
+    for u in urls:
+        if 'dataset/' in u: #or ('/data/' in u and not u.endswith('/data/')):
+            # print("\ntesting: %s" % u)
+            c = cat_from_url(u)
+            # print(c)
+            cats += c
+    print("categories: ")
+    print(cats)
+    draw_count(Counter(cats), "reddit_datasets_cats.svg", palette="viridis", rotation=90, margins={'bottom': 0.5})
+
+
 def workflow():
     d = search_subreddit()
     d = split_into_subreddits(d)
@@ -151,6 +168,7 @@ def workflow():
     draw_count(cat_count, "reddit_cat.svg")
     classes = get_classes(d)
     draw_words_freq(classes, 100, palette="mako", out_fname="reddit_class.svg")
+    draw_dataset_edp_cat(d)
 
 
 if __name__ == "__main__":

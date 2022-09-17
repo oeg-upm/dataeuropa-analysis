@@ -24,7 +24,7 @@ def draw_cat_per_sub(d, out_fname=None, palette="mako"):
     plt.clf()
 
 
-def draw_count(cat_counter, out_fname=None, palette="mako"):
+def draw_count(cat_counter, out_fname=None, palette="mako", rotation=0, margins={'bottom': 0.1}):
     data = []
     for cat in cat_counter:
         val = cat_counter[cat]
@@ -33,8 +33,12 @@ def draw_count(cat_counter, out_fname=None, palette="mako"):
 
     df = pd.DataFrame(data, columns=["Category", "Occurrences"])
     ax = sns.barplot(y="Occurrences", x="Category", palette=palette, data=df)
-    ax.figure.subplots_adjust(bottom=0.1)
-    # plt.xticks(rotation=90)
+    if margins:
+        print("margins: ")
+        print(margins)
+        ax.figure.subplots_adjust(**margins)
+        # ax.figure.subplots_adjust(bottom=0.1)
+    plt.xticks(rotation=rotation)
     if out_fname:
         ax.figure.savefig(out_fname)
     else:
