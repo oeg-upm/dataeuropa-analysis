@@ -3,7 +3,7 @@ Repository for the analysis of data.europa.eu done in task 3.4
 
 
 ## StackOverFlow
-![](stackoverflow.svg)
+![](stackoverflow_tags.svg)
 ```
 python -m datacoll.stackoverflow
 ```
@@ -44,3 +44,11 @@ python -m datacoll.github repositories
 ```
 ### Distribution of data.europe.eu resources across Github sources
 ![](data_europe_distribution.svg)
+
+
+
+# Tests
+To run the tests
+```
+python -m unittest tests
+```

@@ -32,7 +32,8 @@ def get_content(j):
     posts = []
     for p in j['items']:
         posts.append(p["body_markdown"])
-
+    return posts
+    
 
 def get_keywords(body):
     keywords = []
@@ -70,8 +71,8 @@ def get_keywords(body):
 def workflow():
     j = get_questions_json()
     tags = get_tags(j)
-    # draw_words_freq(tags, topk=10)
-    draw_words_freq(tags, topk=10, out_fname="stackoverflow.svg")
+    draw_words_freq(tags, topk=10, out_fname="stackoverflow_tags.svg")
+
 
 # ids = get_ids_from_q_json(j)
     # j = get_questions_body(ids)
