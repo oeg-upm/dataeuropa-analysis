@@ -4,14 +4,22 @@ Repository for the analysis of data.europa.eu done in task 3.4
 
 ## StackOverFlow
 ![](stackoverflow_tags.svg)
+![](stackoverflow_datasets_cats.svg)
+![](stackoverflow_cat.svg)
+![](stackoverflow_keywords.svg)
+
+
 ```
 python -m datacoll.stackoverflow
 ```
+
+Because "&#39" actually refers to `'`. 
 
 ## Reddit
 ![](reddit_cat.svg)
 ![](reddit_cat_per_sub.svg)
 ![](reddit_class.svg) 
+![](reddit_keywords.svg)
 #### Dataset per EDP Category
 ![](reddit_datasets_cats.svg) 
 ```

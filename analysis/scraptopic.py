@@ -19,9 +19,17 @@ def get_dataset(dataset_name, cache):
             j = json.load(f)
     else:
         url = base_uri+dataset_name
-        print("calling: %s" % url)
+        print("get_dataset> calling: %s" % url)
         response = requests.get(url)
-        j = response.json()
+
+        if 'application/json' in response.headers.get('Content-Type'):
+            j = response.json()
+            # if cache != "":
+            #     with open(hash_path, 'w') as f:
+            #         json.dump(j, f)
+        else:
+            print("get_dataset> %s has not json response " % url)
+            j = dict()
         if cache != "":
             with open(hash_path, 'w') as f:
                 json.dump(j, f)
@@ -42,13 +50,14 @@ def get_redirect_url(url):
     return new_url
 
 
-def cat_from_url(url):
-    toks = parse(url, seps=[']', '[', '(', ')', ','])
+def cat_from_url(url, seps=[']', '[', '(', ')', ',']):
+    toks = parse(url, seps=seps)
     url = toks[0]
     url = get_redirect_url(url)
     dataset_name = url.split('/')[-1].split("?")[0]
     cache_path = os.path.join("data", "data-europa")
     # print("cache path: %s" % cache_path)
     j = get_dataset(dataset_name, cache_path)
-    return get_categories(j)
-
+    if j:
+        return get_categories(j)
+    return []

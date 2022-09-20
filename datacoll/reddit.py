@@ -1,12 +1,14 @@
 import requests
 import os
 import json
-from analysis.util import ppretty, parse, categorize_edp_url
+from analysis.util import ppretty, parse, categorize_edp_url, urls_from_text
 from analysis.category import draw_cat_per_sub, draw_count
 from analysis.classify import classify_nlp4types
 from analysis.word import draw_words_freq
 from analysis.scraptopic import cat_from_url
+from analysis.keyword import get_top_terms
 from collections import Counter
+
 
 edp_search_query = "data.europa.eu"
 
@@ -32,7 +34,7 @@ def fetch_urls(d):
         for post in d[sub]['posts']:
             post['urls'] = []
             if post['kind'] == "t3":
-                url_list = url_from_text(post['text'])
+                url_list = urls_from_text(text=post['text'], search_query=edp_search_query, seps=["\n", "\r"])
                 if len(url_list) > 0:
                     post['urls'] = url_list
 
@@ -64,24 +66,24 @@ def search_subreddit():
     return j
 
 
-def url_from_text(text):
-    urls = []
-    for t in text.split(' '):
-        for token in parse(t, seps=["\n", "\r"]):
-            token = token.strip()
-            if token == "":
-                continue
-            if edp_search_query not in token:
-                continue
-            cleaned_token = ""
-            # skip if the start of the toke is not h for http or d for data
-            for i in range(len(token)):
-                if token[i:i + 4] in ["http"]:
-                    cleaned_token = token[i:]
-                    break
-            if cleaned_token != "":
-                urls.append(cleaned_token)
-    return urls
+# def url_from_text(text):
+#     urls = []
+#     for t in text.split(' '):
+#         for token in parse(t, seps=["\n", "\r"]):
+#             token = token.strip()
+#             if token == "":
+#                 continue
+#             if edp_search_query not in token:
+#                 continue
+#             cleaned_token = ""
+#             # skip if the start of the toke is not h for http or d for data
+#             for i in range(len(token)):
+#                 if token[i:i + 4] in ["http"]:
+#                     cleaned_token = token[i:]
+#                     break
+#             if cleaned_token != "":
+#                 urls.append(cleaned_token)
+#     return urls
 
 
 def force_https(urls):
@@ -147,7 +149,7 @@ def draw_dataset_edp_cat(d):
         urls += d[sub]['urls']
     cats = []
     for u in urls:
-        if 'dataset/' in u: #or ('/data/' in u and not u.endswith('/data/')):
+        if 'dataset' in u:  #or ('/data/' in u and not u.endswith('/data/')):
             # print("\ntesting: %s" % u)
             c = cat_from_url(u)
             # print(c)
@@ -157,12 +159,26 @@ def draw_dataset_edp_cat(d):
     draw_count(Counter(cats), "reddit_datasets_cats.svg", palette="viridis", rotation=90, margins={'bottom': 0.5})
 
 
+def get_posts(d):
+    posts = []
+    for sub in d:
+        for post in d[sub]['posts']:
+            if post['kind'] == "t3":
+                posts.append(post['text'])
+    return posts
+
+
 def workflow():
     d = search_subreddit()
     d = split_into_subreddits(d)
     fetch_urls(d)
     d = add_category(d)
     remove_empty(d)
+
+    posts = get_posts(d)
+    top_terms = get_top_terms(posts, k_per_doc=20, top_k=0, min_len=3)
+    draw_words_freq(top_terms, topk=20, ylabel="keywords", out_fname="reddit_keywords.svg")
+
     draw_cat_per_sub(d, "reddit_cat_per_sub.svg", palette="magma_r")
     cat_count = get_cat_merged(d)
     draw_count(cat_count, "reddit_cat.svg")

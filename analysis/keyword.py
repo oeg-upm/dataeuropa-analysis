@@ -50,13 +50,10 @@ def tf_idf(texts):
                 docs_per_term[t] = []
             docs_per_term[t].append(i)
 
-    terms_idf = idf_docs(docs_per_term, len(texts))
-    # print("\nterms idf: ")
-    # print(terms_idf)
-    #
-    # print("\ntf: ")
+    # print("\ndocs_tf: ")
     # print(docs_tf)
-    # print("=========")
+
+    terms_idf = idf_docs(docs_per_term, len(texts))
 
     tf_idf_dict = dict()
     for doc_id in docs_tf:
@@ -73,3 +70,35 @@ def idf_docs(docs_per_term, N):
             continue
         idf_dict[term] = math.log(N/len(docs_per_term[term]), 10)
     return idf_dict
+
+
+def get_top_terms(texts, k_per_doc, top_k, min_len=1, term_only=True):
+    d = tf_idf(texts)
+    term_scores = []
+    for doc_id in d:
+        keys = sorted(d[doc_id], key=d[doc_id].get, reverse=True)
+        keys = [k for k in keys if len(k) >= min_len]
+        if k_per_doc > 0:
+            keys = keys[:k_per_doc]
+        for k in keys:
+            p = (d[doc_id][k], k)
+            term_scores.append(p)
+
+    term_scores.sort(reverse=True)
+
+    if term_only:
+
+        top_terms = [p[1] for p in term_scores]
+        if top_k > 0:
+            top_terms = top_terms[:top_k]
+        return top_terms
+
+    if top_k > 0:
+        term_scores = term_scores[:top_k]
+    return term_scores
+    #
+    # for p in term_scores:
+    #     print(p)
+
+
+
