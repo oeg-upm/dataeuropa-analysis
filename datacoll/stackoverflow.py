@@ -110,9 +110,13 @@ def workflow():
     tags = get_tags(j)
     draw_words_freq(tags, topk=10, out_fname="stackoverflow_tags.svg")
     posts = get_content(j)
+    print("%d posts are found. " % len(posts))
     top_terms = get_top_terms(posts, k_per_doc=20, top_k=0, min_len=3)
     draw_words_freq(top_terms, topk=20, ylabel="keywords", out_fname="stackoverflow_keywords.svg")
     urls = get_urls(posts)
+    print("%d urls are found. " % len(urls))
+    for u in urls:
+        print(u)
     draw_dataset_edp_cat(urls)
     cat_count = get_categories(urls)
     draw_count(cat_count, "stackoverflow_cat.svg")

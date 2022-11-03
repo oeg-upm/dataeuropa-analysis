@@ -60,3 +60,10 @@ To run the tests
 ```
 python -m unittest tests
 ```
+
+# MISC
+To compare the results from algorithm 1 (using the `body` parameter) vs algorithm 2 (using the `q` parameter)
+
+```
+python -m misc.stackoverflow_search_algorithms
+```
