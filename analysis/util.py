@@ -58,7 +58,7 @@ def urls_from_text(text, search_query, seps=["\n", "\r"]):
             cleaned_token = ""
             # skip if the start of the toke is not h for http or d for data
             for i in range(len(token)):
-                if token[i:i + 4] in ["http"]:
+                if token[i:i + 4] == "http":
                     cleaned_token = token[i:]
                     break
             if cleaned_token != "":
