@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+from analysis import util
 from analysis.util import ppretty, parse, categorize_edp_url, urls_from_text
 from analysis.category import draw_cat_per_sub, draw_count
 from analysis.classify import classify_nlp4types
@@ -64,6 +65,40 @@ def search_subreddit():
     with open(json_path) as f:
         j = json.load(f)
     return j
+
+
+def only_include_cat(d, cats):
+    """
+    Only include urls of a certain edp category. This was mainly done to only include data story and dataset categories.
+    :param d:
+    :param cats:
+    :return:
+    """
+    print("\n\n===============\nonly_include_cat: ")
+    for sub in d:
+        print("\n---------\nsub[%s]" % sub)
+        urls = []
+        ids_to_delete = []
+        for post_id, post in enumerate(d[sub]['posts']):
+            post_urls = []
+            for url in post['urls']:
+                url_cat = categorize_edp_url(url)
+                if url_cat in cats:
+                    post_urls.append(url)
+                else:
+                    print("ignore: %s" % (url))
+            post['urls'] = post_urls
+            if len(post_urls) == 0:
+                ids_to_delete.append(post_id)
+            urls += post_urls
+
+        for post_id in ids_to_delete[::-1]:
+            print("deleting post: ")
+            print(d[sub]['posts'][post_id])
+            del d[sub]['posts'][post_id]
+
+        d[sub]['urls'] = urls
+
 
 
 # def url_from_text(text):
@@ -172,8 +207,9 @@ def workflow():
     d = search_subreddit()
     d = split_into_subreddits(d)
     fetch_urls(d)
-    d = add_category(d)
     remove_empty(d)
+    only_include_cat(d, [util.CATEGORY_DATASET, util.CATEGORY_DATA_STORY])
+    d = add_category(d)
 
     posts = get_posts(d)
     top_terms = get_top_terms(posts, k_per_doc=20, top_k=0, min_len=3)

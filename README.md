@@ -22,9 +22,15 @@ Because "&#39" actually refers to `'`.
 ![](reddit_keywords.svg)
 #### Dataset per EDP Category
 ![](reddit_datasets_cats.svg) 
+
+### Collect the data and run the analytics for Reddit
+This will collect the data from reddit as json and store them if they are not collected yet and
+then runs the analytics. This will also generate the different diagrams as well.
 ```
 python -m datacoll.reddit
 ```
+
+
 ## Github
 ### Code
 ![](github_code.svg)

@@ -1,8 +1,12 @@
 import json
 
+CATEGORY_DATA_STORY = "Data Story"
+CATEGORY_DATASET = "Dataset"
 
 def ppretty(j):
     print(json.dumps(j, indent=4, sort_keys=True))
+
+
 
 
 def parse(text, seps=[")", " ", "(", "[", "]", ",", "}", "{", "\n", ".", "\r"]):
@@ -15,7 +19,8 @@ def parse(text, seps=[")", " ", "(", "[", "]", ",", "}", "{", "\n", ".", "\r"]):
             continue
         toks = parse(token, seps[1:])
         tokens += toks
-
+    # print(f"text: {text}")
+    # print(f"tokens: {tokens}")
     return tokens
 
 
@@ -57,5 +62,12 @@ def urls_from_text(text, search_query, seps=["\n", "\r"]):
                     cleaned_token = token[i:]
                     break
             if cleaned_token != "":
+                if "](" in cleaned_token and cleaned_token[-1]==")":
+                    # print(f"Extra split: {cleaned_token}")
+                    cleaned_token = cleaned_token.split("](")[1][:-1]
+                    # print(f"\t=> {cleaned_token}")
+                elif cleaned_token.count(")") > cleaned_token.count("(") and cleaned_token[-1]==")":
+                    # print(f"Remove extra ): %s" % cleaned_token)
+                    cleaned_token = cleaned_token[:-1]
                 urls.append(cleaned_token)
     return urls
