@@ -109,10 +109,16 @@ def plot_types(target, content):
     draw_words_freq(types, 100, palette="mako", out_fname="github_" + target + "_class.svg")
 
 
-if __name__ == "__main__":
-    target = sys.argv[1]
-    get_from_github(github_token, target, edp_search_query)
+def workflow(target):
+    if not os.path.exists(os.path.join('data', 'github', target+".pkl")):
+        print("Fetching the data from GitHub ...")
+        get_from_github(github_token, target, edp_search_query)
     content = get_items_json(target, github_targets[target])
     tokens = analyze_content(target)
     plot_types(target, content)
     plot_tokens(target, tokens)
+
+
+if __name__ == "__main__":
+    target = sys.argv[1]
+    workflow(target)
