@@ -17,6 +17,8 @@ def draw_words_freq(tags, topk, out_fname=None, palette="ch:.25", ylabel="tag"):
 
     if out_fname:
         ax.figure.savefig(out_fname)
+        if out_fname[-3:] == "svg":
+            ax.figure.savefig(out_fname[:-3]+"png")
     else:
         plt.show()
     plt.clf()

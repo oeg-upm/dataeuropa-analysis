@@ -19,6 +19,8 @@ def draw_cat_per_sub(d, out_fname=None, palette="mako"):
     plt.xticks(rotation=90)
     if out_fname:
         ax.figure.savefig(out_fname)
+        if out_fname[-3:] == "svg":
+            ax.figure.savefig(out_fname[:-3]+"png")
     else:
         plt.show()
     plt.clf()
@@ -41,6 +43,8 @@ def draw_count(cat_counter, out_fname=None, palette="mako", rotation=0, margins=
     plt.xticks(rotation=rotation)
     if out_fname:
         ax.figure.savefig(out_fname)
+        if out_fname[-3:] == "svg":
+            ax.figure.savefig(out_fname[:-3]+"png")
     else:
         plt.show()
     plt.clf()

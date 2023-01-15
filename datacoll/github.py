@@ -110,6 +110,11 @@ def plot_types(target, content):
 
 
 def workflow(target):
+    """
+    Workflow for the provided target (e.g., Code, or Commit)
+    :param target:
+    :return:
+    """
     if not os.path.exists(os.path.join('data', 'github', target+".pkl")):
         print("Fetching the data from GitHub ...")
         get_from_github(github_token, target, edp_search_query)
