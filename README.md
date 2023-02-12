@@ -97,7 +97,9 @@ Because "&#39" actually refers to `'`.
 [//]: # (![]&#40;reddit_keywords.svg&#41;)
 
 #### Dataset per EDP Category
-![](reddit_datasets_cats.svg) 
+<img src="reddit_datasets_cats.svg" width="350px"/>
+
+[//]: # (![]&#40;reddit_datasets_cats.svg&#41; )
 
 [//]: # (### Collect the data and run the analytics for Reddit)
 
