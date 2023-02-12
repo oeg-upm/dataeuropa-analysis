@@ -5,12 +5,13 @@ Public organisations are publishing their datasets in data.europa.eu. Several st
 [//]: # (Repository for the analysis of data.europa.eu done in task 3.4)
 
 
-## Outline
+## Table of Content
 1. [Data Collection](#data-collection) 
-2. Analysis 
-3. Experimentation
-4. Tests
-5. Contributors
+2. [Analysis](#analysis)
+3. [Experimentation](#experimentation)
+3. [Results](#results)
+4. [Tests](#tests)
+5. [Contributors](#contributors)
 
 
 ## Data Collection
@@ -31,63 +32,81 @@ There is also some additional analyses that is only feasible for certain platfor
 * Dataset/Datastory per sub-reddit.
 
 
+## Experimentation
+To ease the experimentation, will the data collection and analyses will be executed in a single command (for each platform). If the data is already downloaded, then the analysis will use the downloaded version. 
 
+#### StackOverflow
 ```
 python -m datacoll.stackoverflow
 ```
 
+#### Reddit
+```
+python -m datacoll.reddit
+```
 
-## StackOverFlow
+
+#### GitHub
+GitHub analysis is performed on the code, commits, and repositories. 
+##### Code
+```
+python -m datacoll.github code
+```
+##### Commits
+```
+python -m datacoll.github commits
+```
+##### Repositories
+```
+python -m datacoll.github repositories
+```
+
+
+## Results
+
+
+### StackOverFlow
 ![](stackoverflow_tags.svg)
 ![](stackoverflow_datasets_cats.svg)
 ![](stackoverflow_cat.svg)
 ![](stackoverflow_keywords.svg)
 
 
-```
-python -m datacoll.stackoverflow
-```
-
 Because "&#39" actually refers to `'`. 
 
-## Reddit
+### Reddit
 ![](reddit_cat.svg)
 ![](reddit_cat_per_sub.svg)
 ![](reddit_class.svg) 
 ![](reddit_keywords.svg)
+
 #### Dataset per EDP Category
 ![](reddit_datasets_cats.svg) 
 
-### Collect the data and run the analytics for Reddit
-This will collect the data from reddit as json and store them if they are not collected yet and
-then runs the analytics. This will also generate the different diagrams as well.
-```
-python -m datacoll.reddit
-```
+[//]: # (### Collect the data and run the analytics for Reddit)
+
+[//]: # (This will collect the data from reddit as json and store them if they are not collected yet and)
+
+[//]: # (then runs the analytics. This will also generate the different diagrams as well.)
+
 
 
 ## GitHub
 ### Code
 ![](github_code.svg)
 ![](github_code_class.svg)
-```
-python -m datacoll.github code
-```
+
 
 ### Commits
 ![](github_commits.svg)
 ![](github_commits_class.svg)
-```
-python -m datacoll.github commits
-```
+
 
 
 ### Repositories
 ![](github_repositories.svg)
 ![](github_repositories_class.svg)
-```
-python -m datacoll.github repositories
-```
+
 ### Distribution of data.europe.eu resources across Github sources
 ![](data_europe_distribution.svg)
 
