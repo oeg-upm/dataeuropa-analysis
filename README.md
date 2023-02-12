@@ -66,19 +66,35 @@ python -m datacoll.github repositories
 
 
 ### StackOverFlow
-![](stackoverflow_tags.svg)
-![](stackoverflow_datasets_cats.svg)
-![](stackoverflow_cat.svg)
-![](stackoverflow_keywords.svg)
+<img src="stackoverflow_tags.svg" width="350px"/>
+<img src="stackoverflow_datasets_cats.svg" width="350px"/>
+<img src="stackoverflow_cat.svg" width="300px"/>
+<img src="stackoverflow_keywords.svg" width="300px"/>
+
+[//]: # (![]&#40;stackoverflow_tags.svg&#41;)
+
+[//]: # (![]&#40;stackoverflow_datasets_cats.svg&#41;)
+
+[//]: # (![]&#40;stackoverflow_cat.svg&#41;)
+
+[//]: # (![]&#40;stackoverflow_keywords.svg&#41;)
 
 
 Because "&#39" actually refers to `'`. 
 
 ### Reddit
-![](reddit_cat.svg)
-![](reddit_cat_per_sub.svg)
-![](reddit_class.svg) 
-![](reddit_keywords.svg)
+<img src="reddit_cat.svg" width="350px"/>
+<img src="reddit_cat_per_sub.svg" width="350px"/>
+<img src="reddit_class.svg" width="350px"/>
+<img src="reddit_keywords.svg" width="350px"/>
+
+[//]: # (![]&#40;reddit_cat.svg&#41;)
+
+[//]: # (![]&#40;reddit_cat_per_sub.svg&#41;)
+
+[//]: # (![]&#40;reddit_class.svg&#41; )
+
+[//]: # (![]&#40;reddit_keywords.svg&#41;)
 
 #### Dataset per EDP Category
 ![](reddit_datasets_cats.svg) 
