@@ -68,8 +68,8 @@ python -m datacoll.github repositories
 ### StackOverFlow
 <img src="stackoverflow_tags.svg" width="350px"/>
 <img src="stackoverflow_datasets_cats.svg" width="350px"/>
-<img src="stackoverflow_cat.svg" width="300px"/>
-<img src="stackoverflow_keywords.svg" width="300px"/>
+<img src="stackoverflow_cat.svg" width="350px"/>
+<img src="stackoverflow_keywords.svg" width="350px"/>
 
 [//]: # (![]&#40;stackoverflow_tags.svg&#41;)
 
@@ -109,22 +109,36 @@ Because "&#39" actually refers to `'`.
 
 ## GitHub
 ### Code
-![](github_code.svg)
-![](github_code_class.svg)
+<img src="github_code.svg" width="350px"/>
+<img src="github_code_class.svg" width="350px"/>
+
+[//]: # (![]&#40;github_code.svg&#41;)
+
+[//]: # (![]&#40;github_code_class.svg&#41;)
 
 
 ### Commits
-![](github_commits.svg)
-![](github_commits_class.svg)
+<img src="github_commits.svg" width="350px"/>
+<img src="github_commits_class.svg" width="350px"/>
+
+[//]: # (![]&#40;github_commits.svg&#41;)
+
+[//]: # (![]&#40;github_commits_class.svg&#41;)
 
 
 
 ### Repositories
-![](github_repositories.svg)
-![](github_repositories_class.svg)
+<img src="github_repositories.svg" width="350px"/>
+<img src="github_repositories_class.svg" width="350px"/>
+
+[//]: # (![]&#40;github_repositories.svg&#41;)
+
+[//]: # (![]&#40;github_repositories_class.svg&#41;)
 
 ### Distribution of data.europe.eu resources across Github sources
-![](data_europe_distribution.svg)
+<img src="data_europe_distribution.svg" width="350px"/>
+
+[//]: # (![]&#40;data_europe_distribution.svg&#41;)
 
 
 
