@@ -1,3 +1,4 @@
+
 # DataEuropa Analysis
 
 Public organisations are publishing their datasets in data.europa.eu. Several studies have been conducted to measure the reuse of these datasets. The aim is to measure the presence of data.europa.eu in external platforms, understand the context in which these datasets are mentioned and analyse the presence of these datasets in these platforms, such as StackOverflow, Reddit, and GitHub.
@@ -34,6 +35,7 @@ There are also some additional analyses that are only feasible for certain platf
 
 * Topical analysis using tagsv (StackOverflow).
 * Dataset/Datastory per sub-reddit (Reddit).
+* Wordcloud term analysis (GitHub).
 
 
 ## Experimentation
