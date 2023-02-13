@@ -1,6 +1,7 @@
 # DataEuropa Analysis
 
-Public organisations are publishing their datasets in data.europa.eu. Several studies are conducted to measure the reuse of these datasets. The aim of this repository is to understand the context in which these datasets are mentioned and analyse the reuse of these datasets from other platforms, such as StackOverflow, Reddit, and GitHub.
+Public organisations are publishing their datasets in data.europa.eu. Several studies have been conducted to measure the reuse of these datasets. The aim is to measure the presence of data.europa.eu in external platforms, understand the context in which these datasets are mentioned and analyse the presence of these datasets in these platforms, such as StackOverflow, Reddit, and GitHub.
+
 
 [//]: # (Repository for the analysis of data.europa.eu done in task 3.4)
 
@@ -10,6 +11,7 @@ Public organisations are publishing their datasets in data.europa.eu. Several st
 2. [Analysis](#analysis)
 3. [Experimentation](#experimentation)
 3. [Results](#results)
+4. [Evolution](#evolution)
 4. [Tests](#tests)
 5. [Contributors](#contributors)
 
@@ -19,7 +21,8 @@ In this process, the data (e.g., posts) containing the link data.europa.eu is do
 
 
 ## Analysis
-The analysis phase is platform agnostic. The different data collection module will call the different analysis function. 
+The analysis phase is platform agnostic. The different data collection modules will call the analysis functions. 
+
 
 The analysis is composed of the following:
 * **Datasets .vs Datastories.**
@@ -27,13 +30,14 @@ The analysis is composed of the following:
 * **Context Topical Analysis.**
 * **Context Keywords.**
 
-There is also some additional analyses that is only feasible for certain platforms (platform-specific analysis).
-* Topical analysis using tags.
-* Dataset/Datastory per sub-reddit.
+There are also some additional analyses that are only feasible for certain platforms (platform-specific analysis).
+
+* Topical analysis using tagsv (StackOverflow).
+* Dataset/Datastory per sub-reddit (Reddit).
 
 
 ## Experimentation
-To ease the experimentation, will the data collection and analyses will be executed in a single command (for each platform). If the data is already downloaded, then the analysis will use the downloaded version. 
+To ease the experimentation, the data collection and analyses will be executed in a single command (for each platform). If the data is already downloaded, then the analysis will use the downloaded version. 
 
 #### StackOverflow
 ```
@@ -143,6 +147,15 @@ Because "&#39" actually refers to `'`.
 [//]: # (![]&#40;data_europe_distribution.svg&#41;)
 
 
+## Evolution
+The results of these analyses are expected to change over time. Hence, the new version of the date would need to be downloaded. Without any change in the code, copy the content of the data folder somewhere else and then delete the JSON files. Note that the data collection from GitHub would take much more time to process.
+
+### Steps to download a new version of the data
+1. Copy the old data somewhere.
+2. Delete the json files.
+3. Run the data collection command (see [Data Collection](#data-collection)). *Note that for GitHub it might take much more time and there is also there is a limit on the API usage.*
+
+
 
 ## Tests
 To run the tests
@@ -151,10 +164,12 @@ python -m unittest tests
 ```
 
 ## MISC
+### Comparing StackOverflow search algorithms
 To compare the results from algorithm 1 (using the `body` parameter) vs algorithm 2 (using the `q` parameter)
 ```
 python -m misc.stackoverflow_search_algorithms
 ```
+
 
 ## Contributors
 * [Ahmad Alobaid](https://github.com/ahmad88me)
