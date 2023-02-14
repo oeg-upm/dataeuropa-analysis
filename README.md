@@ -1,7 +1,7 @@
 
 # DataEuropa Analysis
 
-Public organisations are publishing their datasets in data.europa.eu. Several studies have been conducted to measure the reuse of these datasets. The aim is to measure the presence of data.europa.eu in external platforms, understand the context in which these datasets are mentioned and analyse the presence of these datasets in these platforms, such as StackOverflow, Reddit, and GitHub.
+Public organisations are publishing their datasets in data.europa.eu. Several studies have been conducted to measure the reuse of these datasets. The aim is to measure the presence of data.europa.eu in external platforms, understand the context in which these datasets are mentioned and analyse the presence of these datasets in these platforms, such as StackOverflow, Reddit, and GitHub. In addition to a general search about data.europa.eu across the different platforms, a targeted search to retrieve references to data.europa.eu's *datastories* and *datasets*.
 
 
 [//]: # (Repository for the analysis of data.europa.eu done in task 3.4)
@@ -53,10 +53,11 @@ python -m datacoll.reddit
 
 
 #### GitHub
-GitHub analysis is performed on the code, commits, and repositories. 
+GitHub analysis is performed on the code, commits, repositories, and issues. 
+**A valid GitHub Identification Token must be specified in order to access the GitHub API**. As GitHub petitions are limited, data will be collected incrementally. Therefore, if a preexisting data collection is found, executing the data collection script will resume the search from the last collected element.
 ##### Code
 ```
-python -m datacoll.github code
+python -m datacoll.github code 
 ```
 ##### Commits
 ```
@@ -150,11 +151,11 @@ Because "&#39" actually refers to `'`.
 
 
 ## Evolution
-The results of these analyses are expected to change over time. Hence, the new version of the date would need to be downloaded. Without any change in the code, copy the content of the data folder somewhere else and then delete the JSON files. Note that the data collection from GitHub would take much more time to process.
+The results of these analyses are expected to change over time. Hence, the new version of the data would need to be downloaded. Without any change in the code, copy the content of the data folder somewhere else and then delete the JSON files. Note that the data collection from GitHub would take much more time to process.
 
 ### Steps to download a new version of the data
 1. Copy the old data somewhere.
-2. Delete the json files.
+2. Delete the json/pkl files.
 3. Run the data collection command (see [Data Collection](#data-collection)). *Note that for GitHub it might take much more time and there is also there is a limit on the API usage.*
 
 
@@ -165,15 +166,17 @@ To run the tests
 python -m unittest tests
 ```
 
-## MISC
+## Misc
 ### Comparing StackOverflow search algorithms
 To compare the results from algorithm 1 (using the `body` parameter) vs algorithm 2 (using the `q` parameter)
 ```
 python -m misc.stackoverflow_search_algorithms
 ```
 
-
 ## Contributors
 * [Ahmad Alobaid](https://github.com/ahmad88me)
 * [Elvira Amador-Domínguez](https://github.com/eamadord)
 * [Oscar Corcho](https://github.com/ocorcho)
+
+## How to cite
+(To be declared)
