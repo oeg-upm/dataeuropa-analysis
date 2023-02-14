@@ -1,10 +1,12 @@
 
 # DataEuropa Analysis
 
-Public organisations are publishing their datasets in data.europa.eu. Several studies have been conducted to measure the reuse of these datasets. The aim is to measure the presence of data.europa.eu in external platforms, understand the context in which these datasets are mentioned and analyse the presence of these datasets in these platforms, such as StackOverflow, Reddit, and GitHub. In addition to a general search about data.europa.eu across the different platforms, a targeted search to retrieve references to data.europa.eu's *datastories* and *datasets*.
+A large amount of datasets are now available in data.europa.eu, coming from public administrations all over Europe. Several studies have been conducted in the past to measure how these published open datasets are used and reused by organisations and individuals. 
+
+The work covered by the tools and scripts available in this repository focuses on measuring the presence of data.europa.eu content (in general, including datasets and data stories) in external platforms that are commonly used by communities of developers (e.g., StackOverflow, Reddit, GitHub). We aim at understanding how frequent these mentions are, as well as the context in which this content is mentioned. This task has required, in addition to a general search about data.europa.eu across the different platforms, the development of targeted search strategies to retrieve references to data.europa.eu's *datastories* and *datasets* in each of these sources.
 
 
-[//]: # (Repository for the analysis of data.europa.eu done in task 3.4)
+[//]: # (Repository for the analysis of data.europa.eu content presence in platforms commonly used by the software developer communities)
 
 
 ## Table of Content
