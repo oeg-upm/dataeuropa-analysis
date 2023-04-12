@@ -121,7 +121,7 @@ def workflow():
     tags = get_tags(j)
     draw_words_freq(tags, topk=10, out_fname="stackoverflow_tags.svg")
     top_terms = get_top_terms(posts, k_per_doc=20, top_k=0, min_len=3)
-    draw_words_freq(top_terms, topk=20, ylabel="keywords", out_fname="stackoverflow_keywords.svg")
+    draw_words_freq(top_terms, topk=20, ylabel="Keywords", out_fname="stackoverflow_keywords.svg")
 
     urls = get_urls(j)
     for u in urls:

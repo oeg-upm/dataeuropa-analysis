@@ -213,11 +213,11 @@ def workflow():
 
     posts = get_posts(d)
     top_terms = get_top_terms(posts, k_per_doc=20, top_k=0, min_len=3)
-    draw_words_freq(top_terms, topk=20, ylabel="keywords", out_fname="reddit_keywords.svg")
+    draw_words_freq(top_terms, topk=20, ylabel="Keywords", out_fname="reddit_keywords.svg")
 
     draw_cat_per_sub(d, "reddit_cat_per_sub.svg", palette="magma_r")
     cat_count = get_cat_merged(d)
-    draw_count(cat_count, "reddit_cat.svg")
+    draw_count(cat_count, "reddit_cat.svg",margins={'bottom':0.6})
     classes = get_classes(d)
     draw_words_freq(classes, 100, palette="mako", out_fname="reddit_class.svg")
     draw_dataset_edp_cat(d)

@@ -1,6 +1,6 @@
 import json
 
-CATEGORY_DATA_STORY = "Data Story"
+CATEGORY_DATA_STORY = "Data story"
 CATEGORY_DATASET = "Dataset"
 
 def ppretty(j):
@@ -26,7 +26,7 @@ def parse(text, seps=[")", " ", "(", "[", "]", ",", "}", "{", "\n", ".", "\r"]):
 
 def categorize_edp_url(url):
     if "/datastories" in url:
-        return "Data Story"
+        return "Data story"
     if "/eli/" in url:
         return "Legislation"
     if "/dataset" in url or '/data/' in url:

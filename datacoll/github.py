@@ -12,7 +12,7 @@ import sys
 
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 edp_search_query = "data.europa.eu"
-github_token = "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"
+github_token = "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"
 github_targets = {'code': ['repository', 'description'], 'repositories': ['description'],
                   'commits': ['repository', 'description'], 'issues': ['body'], 'topics': []}
 
